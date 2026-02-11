@@ -142,3 +142,66 @@ body {
 footer { background-color: #050505; color: #fff; padding: 40px 20px 20px; border-top: 1px solid #333; position: relative; z-index: 10; }
 .footer-container { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
 .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1a1a1a; font-size: 0.8rem; color: #555; }
+
+/* ============================================================ */
+/* ANIMATION KEYFRAMES (NEW)                                    */
+/* ============================================================ */
+
+/* 1. Animasi Gradient Background (Classroom) */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.classroom-animated-bg {
+    /* Gradient Terang tapi "Cool" (Cyan - Biru Laut - Ungu Tipis) */
+    background: linear-gradient(-45deg, #00c6ff, #0072ff, #2196f3, #4deeea);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    /* Overlay tipis biar teks tetap terbaca */
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+}
+
+/* 2. Animasi Fade In & Slide Up (Landing Page) */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Typing Cursor */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: var(--primary);
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ============================================================ */
+/* UPDATE CLASSROOM TABLE (DENGAN GAMBAR)                       */
+/* ============================================================ */
+.classroom-table td img {
+    width: 120px;       /* Ukuran gambar thumbnail */
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+
+.classroom-table td img:hover {
+    transform: scale(1.5); /* Zoom saat di-hover */
+    z-index: 10;
+    position: relative;
+}
+
+/* Kolom Gambar supaya rapi */
+.img-col { 
+    width: 140px; text-align: center; 
+}
