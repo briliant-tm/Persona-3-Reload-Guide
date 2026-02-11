@@ -11,7 +11,7 @@
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">P3R RELOAD</a>
+        <a href="index.html" class="logo">PERSONA 3 RELOAD</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="combat.html">Combat</a></li>
@@ -22,67 +22,98 @@
         <div class="hamburger"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <div class="classroom-animated-bg"></div>
+    <div class="dark-hour-bg">
+        <div class="particles"></div>
+        <div class="fog"></div>
+    </div>
 
     <div class="page-container">
-        <h1 class="section-heading reveal-text" style="color: #fff; text-shadow: 2px 2px 0 #000;">
+        <h1 class="section-heading reveal-text" style="color: #fff; text-shadow: 2px 2px 0 var(--primary);">
             Classroom Answers
         </h1>
-        <p class="section-desc reveal-text" style="color: #eee;">
-            Cari jawaban sekolah & ujian dengan cepat. Ketik pertanyaan di bawah.
-        </p>
         
-        <input type="text" id="searchInput" class="search-box reveal-text" placeholder="Cari pertanyaan atau tanggal... (Contoh: Maglev, Jomon)">
+        <input type="text" id="searchInput" class="search-box reveal-text" placeholder="Cari pertanyaan... (Contoh: Maglev, Jomon)">
 
-        <table class="classroom-table reveal-text" id="answerTable">
-            <thead>
-                <tr>
-                    <th class="date-col">Date</th>
-                    <th class="img-col">Image</th> <th>Question</th>
-                    <th>Answer</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="date-col">4/8</td>
-                    <td class="img-col">
-                        <img src="assets/images/classroom/4-8.jpg" alt="Carp Streamer" onerror="this.style.display='none'">
-                    </td>
-                    <td>What phrase symbolizes summer?</td>
-                    <td class="answer-col">A vivid carp streamer</td>
-                </tr>
+        <div class="main-layout reveal-text">
+            
+            <div class="content-area">
+                <table class="classroom-table" id="answerTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px;">Date & Context</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td class="date-wrapper">
+                                <img src="assets/images/classroom/4-8.jpg" alt="Img" class="thumb-large" onerror="this.style.display='none'">
+                                <span class="date-text">4/8</span>
+                            </td>
+                            <td>What phrase symbolizes summer?</td>
+                            <td class="answer-col">A vivid carp streamer</td>
+                        </tr>
 
-                <tr>
-                    <td class="date-col">4/18</td>
-                    <td class="img-col">
-                        <img src="assets/images/classroom/4-18.jpg" alt="Middens" onerror="this.style.display='none'">
-                    </td>
-                    <td>Places where people dumped waste in Jomon period?</td>
-                    <td class="answer-col">Middens</td>
-                </tr>
+                        <tr>
+                            <td class="date-wrapper">
+                                <img src="assets/images/classroom/4-18.jpg" alt="Img" class="thumb-large" onerror="this.style.display='none'">
+                                <span class="date-text">4/18</span>
+                            </td>
+                            <td>Places where people dumped waste in Jomon period?</td>
+                            <td class="answer-col">Middens</td>
+                        </tr>
 
-                <tr>
-                    <td class="date-col">4/27</td>
-                    <td class="img-col">
-                        <img src="assets/images/classroom/4-27.jpg" alt="Spiral" onerror="this.style.display='none'">
-                    </td>
-                    <td>Which is not an algebraic spiral?</td>
-                    <td class="answer-col">A)</td>
-                </tr>
+                        <tr>
+                            <td class="date-wrapper">
+                                <img src="assets/images/classroom/4-27.jpg" alt="Img" class="thumb-large" onerror="this.style.display='none'">
+                                <span class="date-text">4/27</span>
+                            </td>
+                            <td>Which is not an algebraic spiral?</td>
+                            <td class="answer-col">A)</td>
+                        </tr>
 
-                </tbody>
-        </table>
-    </div>
+                    </tbody>
+                </table>
+            </div>
+
+            <aside class="sidebar">
+                <h3>Related Guides</h3>
+                <ul>
+                    <li>
+                        <a href="story.html">
+                            <i class="fas fa-heart" style="color: pink;"></i> Social Link Guide
+                            <br><small style="color: #666;">Max Rank All Characters</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="combat.html">
+                            <i class="fas fa-skull" style="color: var(--primary);"></i> Tartarus Bosses
+                            <br><small style="color: #666;">Floor 1-264 Strategy</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="wiki.html">
+                            <i class="fas fa-book"></i> Exam Rewards
+                            <br><small style="color: #666;">Mitsuru's Rewards List</small>
+                        </a>
+                    </li>
+                </ul>
+
+                <h3>External Links</h3>
+                <ul>
+                    <li><a href="https://lzcorp.vercel.app" target="_blank">LZ Corp Portfolio</a></li>
+                    <li><a href="#" target="_blank">Official P3R Website</a></li>
+                </ul>
+            </aside>
+
+        </div> </div>
 
     <footer>
         <div class="footer-container">
-            <div>
-                <h4>LZ Corporation Ltd.</h4>
-                <p style="color: #aaa; font-size: 0.9rem;">Simplifying connectivity. Amplifying sound.</p>
-            </div>
-            <div>
-                <p>&copy; 2026 LZ Corporation Ltd.</p>
-            </div>
+            <div><h4>LZ Corporation Ltd.</h4></div>
+            <div><p>&copy; 2026 LZ Corporation Ltd.</p></div>
         </div>
     </footer>
 
@@ -94,26 +125,21 @@
             const table = document.getElementById('answerTable');
             const tr = table.getElementsByTagName('tr');
 
-            // Tambahkan class 'visible' agar animasi muncul saat loading
             setTimeout(() => {
                 const reveals = document.querySelectorAll('.reveal-text');
                 reveals.forEach(el => el.classList.add('visible'));
             }, 100);
 
-            // Logic Pencarian
             searchInput.addEventListener('keyup', function() {
                 const filter = searchInput.value.toLowerCase();
-                
-                // Loop baris tabel (mulai dari 1 karena 0 itu Header)
                 for (let i = 1; i < tr.length; i++) {
-                    // Index 0 = Tanggal
-                    // Index 1 = Gambar (Dilewati)
-                    // Index 2 = Pertanyaan
-                    let tdDate = tr[i].getElementsByTagName("td")[0];
-                    let tdQuest = tr[i].getElementsByTagName("td")[2]; // <-- Perhatikan ini sekarang Index 2
+                    // Index 0 = Wrapper (Date + Img) -> Ambil text tanggalnya
+                    // Index 1 = Question
+                    let tdWrapper = tr[i].getElementsByTagName("td")[0];
+                    let tdQuest = tr[i].getElementsByTagName("td")[1];
                     
-                    if (tdDate || tdQuest) {
-                        let txtValueDate = tdDate.textContent || tdDate.innerText;
+                    if (tdWrapper || tdQuest) {
+                        let txtValueDate = tdWrapper.textContent || tdWrapper.innerText;
                         let txtValueQuest = tdQuest.textContent || tdQuest.innerText;
                         
                         if (txtValueDate.toLowerCase().indexOf(filter) > -1 || txtValueQuest.toLowerCase().indexOf(filter) > -1) {
