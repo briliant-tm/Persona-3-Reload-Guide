@@ -11,52 +11,73 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">P3R RELOAD</div>
+        <a href="#home" class="logo">P3R RELOAD</a>
+        
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="story.html">Story</a></li>
-            <li><a href="combat.html">Combat</a></li>
-            <li><a href="classroom.html">Classroom</a></li>
-            <li><a href="guide.html">Guide</a></li>
-            <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#combat">Combat</a></li>
+            <li><a href="#story">Story</a></li>
+            <li><a href="classroom.html">Classroom</a></li> <li><a href="wiki.html">Wiki</a></li>
         </ul>
         <div class="hamburger"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <section class="hero-section">
-        <div class="p3r-bg"></div> <div class="hero-content">
-            <p>Welcome to the Dark Hour</p>
-            <h1>MEMENTO MORI</h1>
+    <section id="home" class="scroll-section bg-home">
+        <div class="content-wrapper">
+            <h2 class="sub-title fade-in">Welcome to the Dark Hour</h2>
+            <h1 class="main-title glitch-effect">MEMENTO MORI</h1>
+            <p class="tagline">"Time never waits. It delivers all equally to the same end."</p>
             
-            <div class="menu-grid">
-                
-                <a href="classroom.html" class="menu-card">
-                    <i class="fas fa-school"></i>
-                    <h3>Classroom Answers</h3>
-                    <p>Contekan jawaban sekolah & ujian</p>
-                </a>
-
-                <a href="combat.html" class="menu-card">
-                    <i class="fas fa-fist-raised"></i>
-                    <h3>Combat & Fusion</h3>
-                    <p>Panduan Boss & Persona Fusion</p>
-                </a>
-
-                <a href="story.html" class="menu-card">
-                    <i class="fas fa-book-open"></i>
-                    <h3>Story & Social Link</h3>
-                    <p>Panduan Max Rank Social Link</p>
-                </a>
-
-                <a href="wiki.html" class="menu-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Wiki Data</h3>
-                    <p>Database Item & Skill</p>
-                </a>
-
-            </div>
+            <a href="https://lzcorp.vercel.app" target="_blank" class="btn-lz">
+                Created by LZ Corp <i class="fas fa-external-link-alt"></i>
+            </a>
         </div>
     </section>
+
+    <section id="combat" class="scroll-section bg-combat">
+        <div class="content-wrapper text-left">
+            <h2 class="section-heading">COMBAT & TACTICS</h2>
+            <p class="section-desc">
+                Kuasai setiap kelemahan Shadow. Pelajari strategi Fusion Persona terkuat 
+                dan dominasi setiap lantai Tartarus.
+            </p>
+            <a href="combat.html" class="btn-p3r">
+                Open Combat Guide <i class="fas fa-fist-raised"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="story" class="scroll-section bg-story">
+        <div class="content-wrapper text-right">
+            <h2 class="section-heading">STORY & BONDS</h2>
+            <p class="section-desc">
+                Setiap pertemuan memiliki makna. Maksimalkan Social Link Anda 
+                dan temukan jawaban di balik misteri Gekkoukan High.
+            </p>
+            <a href="story.html" class="btn-p3r">
+                Read Story Guide <i class="fas fa-book-open"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> West Java, Indonesia</li>
+                    <li><i class="fas fa-envelope"></i> lzcorp.vr1l@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>LZ Corporation Ltd.</h4>
+                <p class="brand-desc">Simplifying connectivity. Amplifying sound.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LZ Corporation Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>
