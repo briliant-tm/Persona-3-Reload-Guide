@@ -11,29 +11,31 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">P3R RELOAD</div>
+        <a href="index.html" class="logo">PERSONA 3 RELOAD</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="story.html">Story</a></li>
             <li><a href="combat.html">Combat</a></li>
+            <li><a href="story.html">Story</a></li>
             <li><a href="classroom.html" class="active">Classroom</a></li>
-            <li><a href="guide.html">Guide</a></li>
             <li><a href="wiki.html">Wiki</a></li>
         </ul>
         <div class="hamburger"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <div class="p3r-bg"></div> <div class="page-container">
-        <h1 class="page-title">School & Exam Answers</h1>
+    <div class="page-bg-fixed"></div>
+
+    <div class="page-container">
+        <h1 class="section-heading" style="color: var(--primary);">Classroom Answers</h1>
+        <p class="section-desc">Ketik kata kunci pertanyaan atau tanggal di bawah ini.</p>
         
-        <input type="text" id="searchInput" class="search-box" placeholder="Cari pertanyaan atau tanggal... (Contoh: May, Junpei, Farm)">
+        <input type="text" id="searchInput" class="search-box" placeholder="Cari pertanyaan... (Contoh: Maglev, Jomon, Rain)">
 
         <table class="classroom-table" id="answerTable">
             <thead>
                 <tr>
                     <th>Date</th>
-                    <th>Question / Context</th>
-                    <th>Correct Answer</th>
+                    <th>Question</th>
+                    <th>Answer</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,48 +46,44 @@
                 </tr>
                 <tr>
                     <td class="date-col">4/18</td>
-                    <td>The places where people dumped their waste in the Jomon period...</td>
+                    <td>Places where people dumped waste in Jomon period?</td>
                     <td class="answer-col">Middens</td>
                 </tr>
                 <tr>
                     <td class="date-col">4/27</td>
-                    <td>Which of the following is not an algebraic spiral?</td>
+                    <td>Which is not an algebraic spiral?</td>
                     <td class="answer-col">A)</td>
-                </tr>
-                
-                <tr>
-                    <td class="date-col">5/6</td>
-                    <td>What do you call the device that helps the train generate power?</td>
-                    <td class="answer-col">A Pantograph</td>
-                </tr>
-                <tr>
-                    <td class="date-col">5/13</td>
-                    <td>Which investigator implied that pendulum could be used for...</td>
-                    <td class="answer-col">Foucault</td>
                 </tr>
                 </tbody>
         </table>
     </div>
 
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h4>LZ Corporation Ltd.</h4>
+            </div>
+            <div>
+                <p>&copy; 2026 LZ Corporation Ltd.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="js/script.js"></script>
     <script>
-        // SCRIPT KHUSUS PENCARIAN DI HALAMAN INI
+        // Script Search Table
         const searchInput = document.getElementById('searchInput');
         const table = document.getElementById('answerTable');
         const tr = table.getElementsByTagName('tr');
 
         searchInput.addEventListener('keyup', function() {
             const filter = searchInput.value.toLowerCase();
-            
-            // Loop semua baris tabel (mulai index 1 karena 0 adalah header)
             for (let i = 1; i < tr.length; i++) {
                 let tdDate = tr[i].getElementsByTagName("td")[0];
                 let tdQuest = tr[i].getElementsByTagName("td")[1];
-                
                 if (tdDate || tdQuest) {
                     let txtValueDate = tdDate.textContent || tdDate.innerText;
                     let txtValueQuest = tdQuest.textContent || tdQuest.innerText;
-                    
                     if (txtValueDate.toLowerCase().indexOf(filter) > -1 || txtValueQuest.toLowerCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {

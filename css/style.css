@@ -1,14 +1,21 @@
 /* --- GLOBAL RESET --- */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-body { background-color: #0a0a12; color: #fff; overflow-x: hidden; }
-html { scroll-behavior: smooth; }
+
+/* PERBAIKAN 1: Hapus height 100vh di body agar Classroom bisa di-scroll */
+body { 
+    background-color: #0a0a12; 
+    color: #fff; 
+    overflow-x: hidden; 
+    min-height: 100vh;
+}
 
 :root {
     --primary: #4deeea; /* Biru P3R */
+    --secondary: #0056b3;
     --dark: #000;
 }
 
-/* --- NAVBAR (MINIMALIS TRANSPARAN) --- */
+/* --- NAVBAR --- */
 .navbar {
     position: fixed;
     top: 0;
@@ -17,12 +24,11 @@ html { scroll-behavior: smooth; }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent; /* Transparan Total */
+    /* PERBAIKAN: Kasih sedikit background gelap agar teks terbaca di segala situasi */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
     z-index: 1000;
-    transition: 0.3s;
 }
 
-/* Logo Text Only */
 .logo {
     font-size: 1.5rem;
     font-weight: 800;
@@ -30,7 +36,7 @@ html { scroll-behavior: smooth; }
     text-transform: uppercase;
     letter-spacing: 2px;
     font-style: italic;
-    text-shadow: 0 0 10px rgba(77, 238, 234, 0.5); /* Glow dikit biar kebaca */
+    text-shadow: 0 0 10px rgba(77, 238, 234, 0.5);
     text-decoration: none;
 }
 
@@ -41,152 +47,98 @@ html { scroll-behavior: smooth; }
     font-size: 0.9rem;
     text-transform: uppercase;
     text-decoration: none;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.8); /* Shadow biar kebaca di background terang */
+    text-shadow: 0 2px 5px #000; 
     transition: 0.3s;
 }
-.nav-links a:hover { color: var(--primary); }
+.nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 .hamburger { display: none; color: #fff; cursor: pointer; font-size: 1.5rem; }
 
-/* --- SCROLL SECTIONS (PARALLAX) --- */
+/* --- LANDING PAGE STYLES (INDEX ONLY) --- */
 .scroll-section {
-    height: 100vh; /* Full Layar */
+    height: 100vh; /* Full Layar khusus Section Landing Page */
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* KUNCI EFEK PARALLAX */
+    background-attachment: fixed; /* Parallax Effect */
     position: relative;
     padding: 0 10%;
+    
+    /* PERBAIKAN: Warna cadangan kalau gambar error/tidak ada */
+    background-color: #1a1a2e; 
+    border-bottom: 2px solid var(--primary);
 }
 
-/* Gelapkan background gambar biar teks kebaca */
+/* Overlay agar teks terbaca jelas */
 .scroll-section::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.6); /* Gelapkan background 60% */
     z-index: 1;
 }
 
 .content-wrapper {
     position: relative;
-    z-index: 2; /* Di atas overlay gelap */
+    z-index: 2;
     text-align: center;
     max-width: 800px;
 }
 
-/* Background Images (Ganti URL sesuai selera) */
-.bg-home { background-image: url('https://images4.alphacoders.com/132/1328639.jpeg'); }
-.bg-combat { background-image: url('https://images2.alphacoders.com/133/1330678.png'); } /* Gambar Tartarus/Combat */
-.bg-story { background-image: url('https://images8.alphacoders.com/134/1347738.jpeg'); } /* Gambar Sekolah/Social */
+/* Background Images (Pastikan file ada di folder assets/images/) */
+/* Jika file belum ada, dia akan pakai warna background-color di atas */
+.bg-home { background-image: url('../assets/images/p3r-home.jpg'); }
+.bg-combat { background-image: url('../assets/images/p3r-combat.jpg'); } 
+.bg-story { background-image: url('../assets/images/p3r-story.jpg'); }
 
-/* --- TYPOGRAPHY & BUTTONS --- */
-.main-title {
-    font-size: 5rem;
-    font-weight: 900;
-    font-style: italic;
-    margin: 10px 0;
-    text-shadow: 4px 4px 0px var(--primary);
+/* --- CONTENT PAGE STYLES (CLASSROOM, COMBAT, ETC) --- */
+/* PERBAIKAN: Container khusus agar Classroom tidak ngebug */
+.page-container {
+    padding: 120px 5% 50px; /* Jarak dari atas supaya tidak ketutup Navbar */
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 100vh;
 }
 
-.sub-title { font-size: 1.5rem; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; }
-.tagline { font-size: 1.2rem; margin-bottom: 30px; font-style: italic; color: #ccc; }
-
-.section-heading {
-    font-size: 3.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-style: italic;
-    color: #fff;
-    margin-bottom: 20px;
-    border-bottom: 3px solid var(--primary);
-    display: inline-block;
+.page-bg-fixed {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('../assets/images/p3r-home.jpg') no-repeat center center/cover;
+    filter: brightness(0.3); /* Gelapkan background */
+    z-index: -1;
 }
 
-.section-desc { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; max-width: 600px; }
+/* --- COMPONENTS (TYPOGRAPHY & BUTTONS) --- */
+.main-title { font-size: 4rem; font-weight: 900; font-style: italic; margin: 10px 0; text-shadow: 3px 3px 0 var(--primary); }
+.sub-title { font-size: 1.2rem; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; }
+.section-heading { font-size: 3rem; font-weight: 800; text-transform: uppercase; font-style: italic; color: #fff; margin-bottom: 20px; }
+.section-desc { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
 
-/* Layout Alignments */
 .text-left { text-align: left; align-items: flex-start; display: flex; flex-direction: column; width: 100%; }
 .text-right { text-align: right; align-items: flex-end; display: flex; flex-direction: column; width: 100%; }
 
 /* Buttons */
-.btn-lz {
-    display: inline-block;
-    padding: 12px 30px;
-    border: 2px solid #fff;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-    transition: 0.3s;
-    background: rgba(0,0,0,0.5);
-}
+.btn-lz { display: inline-block; padding: 12px 30px; border: 2px solid #fff; color: #fff; text-transform: uppercase; font-weight: bold; margin-top: 20px; transition: 0.3s; text-decoration: none; }
 .btn-lz:hover { background: #fff; color: #000; }
 
-.btn-p3r {
-    display: inline-block;
-    padding: 15px 40px;
-    background: var(--primary);
-    color: #000;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-style: italic;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); /* Bentuk Miring Khas P3 */
-    transition: 0.3s;
-}
+.btn-p3r { display: inline-block; padding: 15px 40px; background: var(--primary); color: #000; font-weight: 800; text-transform: uppercase; font-style: italic; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); transition: 0.3s; text-decoration: none;}
 .btn-p3r:hover { transform: scale(1.1) skewX(-10deg); box-shadow: 0 0 20px var(--primary); }
 
+/* --- CLASSROOM TABLE STYLE --- */
+.search-box { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 2px solid var(--primary); color: #fff; font-size: 1.1rem; margin-bottom: 30px; border-radius: 5px; }
 
-/* --- FOOTER (LZ CORP STYLE) --- */
-footer {
-    background-color: #050505;
-    color: #ffffff;
-    padding: 40px 20px 20px;
-    border-top: 1px solid #333;
-}
+.classroom-table { width: 100%; border-collapse: collapse; background: rgba(0, 0, 0, 0.8); border: 1px solid #333; margin-bottom: 50px; }
+.classroom-table th { background: var(--secondary); color: #fff; padding: 15px; text-transform: uppercase; text-align: left; }
+.classroom-table td { padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.classroom-table tr:hover { background: rgba(77, 238, 234, 0.1); }
+.date-col { color: var(--primary); font-weight: bold; width: 100px; }
+.answer-col { font-weight: bold; color: #fff; }
 
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-}
-
-.footer-left ul { list-style: none; margin-top: 10px; }
-.footer-left ul li { margin-bottom: 10px; color: #aaa; font-size: 0.9rem; }
-.footer-left ul li i { margin-right: 10px; color: var(--primary); }
-
-.footer-right { text-align: right; }
-.brand-desc { color: #666; font-size: 0.85rem; margin-top: 5px; font-style: italic; }
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #1a1a1a;
-    font-size: 0.8rem;
-    color: #555;
-}
-
-/* Responsive Footer */
-@media (max-width: 768px) {
-    .footer-container { flex-direction: column; gap: 30px; }
-    .footer-right { text-align: left; }
-    
-    /* Responsive Navbar */
-    .navbar { background: rgba(0,0,0,0.8); } /* Kasih background dikit di HP biar kebaca */
-    .nav-links {
-        position: fixed; top: 0; right: 0; height: 100vh; width: 70%;
-        background: #000; flex-direction: column; justify-content: center;
-        align-items: center; transform: translateX(100%);
-    }
-    .nav-links.active { transform: translateX(0); }
-    .hamburger { display: block; z-index: 1001; }
-    
-    .main-title { font-size: 3rem; }
-    .section-heading { font-size: 2rem; }
-}
+/* --- FOOTER --- */
+footer { background-color: #050505; color: #fff; padding: 40px 20px 20px; border-top: 1px solid #333; position: relative; z-index: 10; }
+.footer-container { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+.footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1a1a1a; font-size: 0.8rem; color: #555; }
