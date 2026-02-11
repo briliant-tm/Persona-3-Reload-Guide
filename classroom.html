@@ -11,7 +11,7 @@
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">PERSONA 3 RELOAD</a>
+        <a href="index.html" class="logo">P3R RELOAD</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="combat.html">Combat</a></li>
@@ -22,38 +22,54 @@
         <div class="hamburger"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <div class="page-bg-fixed"></div>
+    <div class="classroom-animated-bg"></div>
 
     <div class="page-container">
-        <h1 class="section-heading" style="color: var(--primary);">Classroom Answers</h1>
-        <p class="section-desc">Ketik kata kunci pertanyaan atau tanggal di bawah ini.</p>
+        <h1 class="section-heading reveal-text" style="color: #fff; text-shadow: 2px 2px 0 #000;">
+            Classroom Answers
+        </h1>
+        <p class="section-desc reveal-text" style="color: #eee;">
+            Cari jawaban sekolah & ujian dengan cepat. Ketik pertanyaan di bawah.
+        </p>
         
-        <input type="text" id="searchInput" class="search-box" placeholder="Cari pertanyaan... (Contoh: Maglev, Jomon, Rain)">
+        <input type="text" id="searchInput" class="search-box reveal-text" placeholder="Cari pertanyaan atau tanggal... (Contoh: Maglev, Jomon)">
 
-        <table class="classroom-table" id="answerTable">
+        <table class="classroom-table reveal-text" id="answerTable">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Question</th>
+                    <th class="date-col">Date</th>
+                    <th class="img-col">Image</th> <th>Question</th>
                     <th>Answer</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td class="date-col">4/8</td>
+                    <td class="img-col">
+                        <img src="assets/images/classroom/4-8.jpg" alt="Carp Streamer" onerror="this.style.display='none'">
+                    </td>
                     <td>What phrase symbolizes summer?</td>
                     <td class="answer-col">A vivid carp streamer</td>
                 </tr>
+
                 <tr>
                     <td class="date-col">4/18</td>
+                    <td class="img-col">
+                        <img src="assets/images/classroom/4-18.jpg" alt="Middens" onerror="this.style.display='none'">
+                    </td>
                     <td>Places where people dumped waste in Jomon period?</td>
                     <td class="answer-col">Middens</td>
                 </tr>
+
                 <tr>
                     <td class="date-col">4/27</td>
+                    <td class="img-col">
+                        <img src="assets/images/classroom/4-27.jpg" alt="Spiral" onerror="this.style.display='none'">
+                    </td>
                     <td>Which is not an algebraic spiral?</td>
                     <td class="answer-col">A)</td>
                 </tr>
+
                 </tbody>
         </table>
     </div>
@@ -62,6 +78,7 @@
         <div class="footer-container">
             <div>
                 <h4>LZ Corporation Ltd.</h4>
+                <p style="color: #aaa; font-size: 0.9rem;">Simplifying connectivity. Amplifying sound.</p>
             </div>
             <div>
                 <p>&copy; 2026 LZ Corporation Ltd.</p>
@@ -70,27 +87,43 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-        // Script Search Table
-        const searchInput = document.getElementById('searchInput');
-        const table = document.getElementById('answerTable');
-        const tr = table.getElementsByTagName('tr');
 
-        searchInput.addEventListener('keyup', function() {
-            const filter = searchInput.value.toLowerCase();
-            for (let i = 1; i < tr.length; i++) {
-                let tdDate = tr[i].getElementsByTagName("td")[0];
-                let tdQuest = tr[i].getElementsByTagName("td")[1];
-                if (tdDate || tdQuest) {
-                    let txtValueDate = tdDate.textContent || tdDate.innerText;
-                    let txtValueQuest = tdQuest.textContent || tdQuest.innerText;
-                    if (txtValueDate.toLowerCase().indexOf(filter) > -1 || txtValueQuest.toLowerCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const table = document.getElementById('answerTable');
+            const tr = table.getElementsByTagName('tr');
+
+            // Tambahkan class 'visible' agar animasi muncul saat loading
+            setTimeout(() => {
+                const reveals = document.querySelectorAll('.reveal-text');
+                reveals.forEach(el => el.classList.add('visible'));
+            }, 100);
+
+            // Logic Pencarian
+            searchInput.addEventListener('keyup', function() {
+                const filter = searchInput.value.toLowerCase();
+                
+                // Loop baris tabel (mulai dari 1 karena 0 itu Header)
+                for (let i = 1; i < tr.length; i++) {
+                    // Index 0 = Tanggal
+                    // Index 1 = Gambar (Dilewati)
+                    // Index 2 = Pertanyaan
+                    let tdDate = tr[i].getElementsByTagName("td")[0];
+                    let tdQuest = tr[i].getElementsByTagName("td")[2]; // <-- Perhatikan ini sekarang Index 2
+                    
+                    if (tdDate || tdQuest) {
+                        let txtValueDate = tdDate.textContent || tdDate.innerText;
+                        let txtValueQuest = tdQuest.textContent || tdQuest.innerText;
+                        
+                        if (txtValueDate.toLowerCase().indexOf(filter) > -1 || txtValueQuest.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
                     }
                 }
-            }
+            });
         });
     </script>
 </body>
