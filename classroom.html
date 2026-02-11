@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom Answers | P3R Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">PERSONA 3 RELOAD</a>
+        <a href="index.html" class="logo">P3R RELOAD</a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="combat.html">Combat</a></li>
@@ -28,135 +28,109 @@
     </div>
 
     <div class="page-container">
-        <h1 class="section-heading reveal-text" style="color: #fff; text-shadow: 2px 2px 0 var(--primary);">
-            Classroom Answers
-        </h1>
         
-        <input type="text" id="searchInput" class="search-box reveal-text" placeholder="Cari pertanyaan... (Contoh: Maglev, Jomon)">
-
         <div class="main-layout reveal-text">
             
             <div class="content-area">
-                <table class="classroom-table" id="answerTable">
-                    <thead>
-                        <tr>
-                            <th style="width: 280px;">Date & Image</th>
-                            <th>Question</th>
-                            <th>Answer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                
+                <h1 class="section-heading">Classroom Answers</h1>
+                <input type="text" id="searchInput" class="search-box" placeholder="Cari pertanyaan, tanggal, atau jawaban...">
+
+                <div class="classroom-feed" id="cardFeed">
+
+                    <div class="classroom-card">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/classroom/4-8.jpg" alt="Soal 4/8" onerror="this.style.display='none'">
+                        </div>
                         
-                        <tr>
-                            <td class="date-wrapper">
-                                <img src="assets/images/classroom/4-8.jpg" alt="Img" class="thumb-large" onerror="this.style.display='none'">
-                                <span class="date-text">4/8</span>
-                            </td>
-                            <td>What phrase symbolizes summer?</td>
-                            <td class="answer-col">A vivid carp streamer</td>
-                        </tr>
+                        <span class="card-date-bubble">4/8</span>
+                        
+                        <div class="card-question-bubble">
+                            What phrase symbolizes summer?
+                        </div>
+                        
+                        <div class="card-answer-bubble">
+                            A Vivid Carp Streamer
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td class="date-wrapper">
-                                <img src="assets/images/classroom/4-18.jpg" alt="Img" class="thumb-large" onerror="this.style.display='none'">
-                                <span class="date-text">4/18</span>
-                            </td>
-                            <td>Places where people dumped waste in Jomon period?</td>
-                            <td class="answer-col">Middens</td>
-                        </tr>
+                    <div class="classroom-card">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/classroom/4-18.jpg" alt="Soal 4/18" onerror="this.style.display='none'">
+                        </div>
+                        <span class="card-date-bubble">4/18</span>
+                        <div class="card-question-bubble">
+                            The places where people dumped their waste in the Jomon period?
+                        </div>
+                        <div class="card-answer-bubble">
+                            Middens
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td class="date-wrapper">
-                                <img src="assets/images/classroom/4-27.jpg" alt="Img" class="thumb-large" onerror="this.style.display='none'">
-                                <span class="date-text">4/27</span>
-                            </td>
-                            <td>Which is not an algebraic spiral?</td>
-                            <td class="answer-col">A)</td>
-                        </tr>
+                    <div class="classroom-card">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/classroom/4-27.jpg" alt="Soal 4/27" onerror="this.style.display='none'">
+                        </div>
+                        <span class="card-date-bubble">4/27</span>
+                        <div class="card-question-bubble">
+                            Which of the following is not an algebraic spiral?
+                        </div>
+                        <div class="card-answer-bubble">
+                            A)
+                        </div>
+                    </div>
 
-                    </tbody>
-                </table>
-            </div>
+                    </div> </div>
 
             <aside class="sidebar">
-                <h3>Guide Navigation</h3>
+                <h3>Quick Nav</h3>
                 <ul>
-                    <li>
-                        <a href="story.html">
-                            Social Link Guide
-                            <br><small style="color: #666;">Max Rank All Characters</small>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="combat.html">
-                            Tartarus Bosses
-                            <br><small style="color: #666;">Floor 1-264 Strategy</small>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wiki.html">
-                            Exam Rewards
-                            <br><small style="color: #666;">Mitsuru's Rewards List</small>
-                        </a>
-                    </li>
+                    <li><a href="story.html">Social Link Guide</a></li>
+                    <li><a href="combat.html">Tartarus Bosses</a></li>
+                    <li><a href="wiki.html">Exam Rewards</a></li>
                 </ul>
-
-                <h3 style="margin-top: 30px;">External Links</h3>
+                <h3 style="margin-top:30px;">External</h3>
                 <ul>
-                    <li>
-                        <a href="https://lzcorporation.vercel.app" target="_blank" style="color: var(--primary); font-weight: bold;">
-                            LZ Corporation Portfolio
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_blank">
-                            Official P3R Website
-                        </a>
-                    </li>
+                    <li><a href="https://lzcorporation.vercel.app" target="_blank" style="color:var(--primary)">LZ Corp Portfolio</a></li>
                 </ul>
             </aside>
 
-        </div> </div>
-
-    <footer>
-        <div class="footer-container">
-            <div><h4>LZ Corporation Ltd.</h4></div>
-            <div><p>&copy; 2026 LZ Corporation Ltd.</p></div>
         </div>
-    </footer>
+    </div>
 
     <script src="js/script.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('searchInput');
-            const table = document.getElementById('answerTable');
-            const tr = table.getElementsByTagName('tr');
+            const cards = document.querySelectorAll('.classroom-card');
 
+            // Munculkan animasi
             setTimeout(() => {
-                const reveals = document.querySelectorAll('.reveal-text');
-                reveals.forEach(el => el.classList.add('visible'));
+                document.querySelector('.main-layout').classList.add('visible');
             }, 100);
 
+            // Logic Pencarian Baru (Mencari di dalam Card)
             searchInput.addEventListener('keyup', function() {
                 const filter = searchInput.value.toLowerCase();
-                for (let i = 1; i < tr.length; i++) {
-                    // Index 0 = Wrapper (Date + Img) -> Ambil text tanggalnya
-                    // Index 1 = Question
-                    let tdWrapper = tr[i].getElementsByTagName("td")[0];
-                    let tdQuest = tr[i].getElementsByTagName("td")[1];
-                    
-                    if (tdWrapper || tdQuest) {
-                        let txtValueDate = tdWrapper.textContent || tdWrapper.innerText;
-                        let txtValueQuest = tdQuest.textContent || tdQuest.innerText;
-                        
-                        if (txtValueDate.toLowerCase().indexOf(filter) > -1 || txtValueQuest.toLowerCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                        } else {
-                            tr[i].style.display = "none";
-                        }
+                
+                cards.forEach(card => {
+                    // Ambil teks dari Tanggal, Pertanyaan, dan Jawaban
+                    const dateText = card.querySelector('.card-date-bubble').textContent.toLowerCase();
+                    const questText = card.querySelector('.card-question-bubble').textContent.toLowerCase();
+                    const ansText = card.querySelector('.card-answer-bubble').textContent.toLowerCase();
+
+                    // Cek apakah ada yang cocok
+                    if (dateText.includes(filter) || questText.includes(filter) || ansText.includes(filter)) {
+                        card.style.display = "block"; // Tampilkan
+                        // Reset animasi biar mulus
+                        card.style.animation = 'none';
+                        card.offsetHeight; /* trigger reflow */
+                        card.style.animation = 'fadeIn 0.5s'; 
+                    } else {
+                        card.style.display = "none"; // Sembunyikan
                     }
-                }
+                });
             });
         });
     </script>

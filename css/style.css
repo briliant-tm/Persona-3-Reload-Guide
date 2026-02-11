@@ -113,9 +113,30 @@ body {
 }
 
 /* --- COMPONENTS (TYPOGRAPHY & BUTTONS) --- */
-.main-title { font-size: 4rem; font-weight: 900; font-style: italic; margin: 10px 0; text-shadow: 3px 3px 0 var(--primary); }
-.sub-title { font-size: 1.2rem; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; }
-.section-heading { font-size: 3rem; font-weight: 800; text-transform: uppercase; font-style: italic; color: #fff; margin-bottom: 20px; }
+.main-title { 
+    font-size: 4rem; 
+    font-weight: 900; 
+    font-style: italic; 
+    margin: 10px 0; 
+    text-shadow: 3px 3px 0 var(--primary); 
+}
+
+.sub-title { 
+    font-size: 1.2rem; 
+    letter-spacing: 5px; 
+    color: var(--primary); 
+    text-transform: uppercase; 
+}
+
+.section-heading { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    font-style: italic; 
+    color: #fff; 
+    margin-bottom: 20px; 
+}
+
 .section-desc { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
 
 .text-left { text-align: left; align-items: flex-start; display: flex; flex-direction: column; width: 100%; }
@@ -128,20 +149,133 @@ body {
 .btn-p3r { display: inline-block; padding: 15px 40px; background: var(--primary); color: #000; font-weight: 800; text-transform: uppercase; font-style: italic; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); transition: 0.3s; text-decoration: none;}
 .btn-p3r:hover { transform: scale(1.1) skewX(-10deg); box-shadow: 0 0 20px var(--primary); }
 
-/* --- CLASSROOM TABLE STYLE --- */
-.search-box { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 2px solid var(--primary); color: #fff; font-size: 1.1rem; margin-bottom: 30px; border-radius: 5px; }
+/* ============================================================ */
+/* NEW LAYOUT: CLASSROOM CARDS (FEED STYLE)                     */
+/* ============================================================ */
 
-.classroom-table { width: 100%; border-collapse: collapse; background: rgba(0, 0, 0, 0.8); border: 1px solid #333; margin-bottom: 50px; }
-.classroom-table th { background: var(--secondary); color: #fff; padding: 15px; text-transform: uppercase; text-align: left; }
-.classroom-table td { padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-.classroom-table tr:hover { background: rgba(77, 238, 234, 0.1); }
-.date-col { color: var(--primary); font-weight: bold; width: 100px; }
-.answer-col { font-weight: bold; color: #fff; }
+/* Container Feed */
+.classroom-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Jarak antar kartu soal */
+    max-width: 800px; /* Batasi lebar biar enak dibaca */
+    margin: 0 auto;   /* Tengahkan */
+}
+
+/* Kartu Utama */
+.classroom-card {
+    background: rgba(0, 0, 0, 0.6); /* Transparan Gelap */
+    border: 1px solid rgba(77, 238, 234, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.classroom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(77, 238, 234, 0.15);
+    border-color: var(--primary);
+}
+
+/* Dekorasi Garis Kiri (P3R Style) */
+.classroom-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    background: linear-gradient(to bottom, var(--primary), transparent);
+}
+
+/* --- BUBBLES / WRAPPERS --- */
+
+/* 1. Bubble Gambar (Paling Atas) */
+.card-img-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.card-img-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+/* 2. Bubble Tanggal */
+.card-date-bubble {
+    display: inline-block;
+    background: var(--primary);
+    color: #000;
+    font-weight: 900;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(77, 238, 234, 0.5);
+    font-style: italic;
+}
+
+/* 3. Bubble Pertanyaan */
+.card-question-bubble {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #fff;
+    padding: 15px 20px;
+    border-radius: 0 10px 10px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* 4. Bubble Jawaban */
+.card-answer-bubble {
+    background: rgba(77, 238, 234, 0.1); /* Biru P3R Tipis */
+    border: 1px solid var(--primary);
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: bold;
+    text-align: center; /* Jawaban di tengah biar tegas */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
 /* --- FOOTER --- */
-footer { background-color: #050505; color: #fff; padding: 40px 20px 20px; border-top: 1px solid #333; position: relative; z-index: 10; }
-.footer-container { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
-.footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1a1a1a; font-size: 0.8rem; color: #555; }
+footer { 
+    background-color: #050505; 
+    color: #fff; 
+    padding: 40px 20px 20px; 
+    border-top: 1px solid #333; 
+    position: relative; 
+    z-index: 10; 
+}
+
+.footer-container { 
+    display: flex; 
+    justify-content: space-between; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    flex-wrap: wrap; 
+}
+
+.footer-bottom { 
+    text-align: center; 
+    margin-top: 40px; 
+    padding-top: 20px; 
+    border-top: 1px solid #1a1a1a; 
+    font-size: 0.8rem; 
+    color: #555; 
+}
 
 /* ============================================================ */
 /* 1. DARK HOUR ATMOSPHERE (PARTICLES & FOG)                    */
