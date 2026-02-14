@@ -1,43 +1,128 @@
-/* --- GLOBAL RESET --- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
-/* PERBAIKAN 1: Hapus height 100vh di body agar Classroom bisa di-scroll */
-body { 
-    background-color: #0a0a12; 
-    color: #fff; 
-    overflow-x: hidden; 
-    min-height: 100vh;
+/* ============================================================
+   1. GLOBAL RESET & VARIABLES
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 :root {
-    --primary: #4deeea; /* Biru P3R */
+    --primary: #4deeea; /* Cyan P3R */
     --secondary: #0056b3;
-    --dark: #000;
+    --dark-bg: #0a0a12; /* Biru Hitam Pekat */
+    --overlay: rgba(0, 0, 0, 0.6);
 }
 
-/* --- NAVBAR --- */
+body {
+    background-color: var(--dark-bg);
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ============================================================
+   2. DARK HOUR ATMOSPHERE (BACKGROUND)
+   ============================================================ */
+.dark-hour-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -5;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+    overflow: hidden;
+    pointer-events: none; /* Background tidak boleh halangi klik */
+}
+
+/* --- PARTIKEL (STARS / DUST) --- */
+.stars {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+
+.stars-1 {
+    background-image: radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                      radial-gradient(2px 2px at 40px 70px, #fff, transparent);
+    background-size: 200px 200px;
+    animation: move-diagonal 100s linear infinite;
+    opacity: 0.6;
+}
+
+.stars-2 {
+    background-image: radial-gradient(2px 2px at 50px 160px, var(--primary), transparent);
+    background-size: 300px 300px;
+    animation: move-diagonal 60s linear infinite reverse;
+    opacity: 0.4;
+}
+
+.stars-3 {
+    background-image: radial-gradient(3px 3px at 100px 100px, var(--primary), transparent);
+    background-size: 400px 400px;
+    animation: move-up 40s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes move-diagonal { to { transform: translate(-1000px, -1000px); } }
+@keyframes move-up { to { transform: translateY(-1000px); } }
+
+/* --- DYNAMIC FOG --- */
+.fog-container {
+    position: absolute;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: -4;
+}
+
+.fog-img {
+    position: absolute;
+    height: 100vh; width: 300vw;
+    background: url('https://raw.githubusercontent.com/danielstuart14/CSS_FOG_ANIMATION/master/fog1.png') repeat-x;
+    background-size: contain;
+    opacity: 0.5;
+}
+
+.fog-1 { bottom: 0; animation: fog-flow 30s linear infinite; }
+.fog-2 { bottom: -10%; animation: fog-flow 60s linear infinite reverse; opacity: 0.3; filter: blur(5px); }
+
+@keyframes fog-flow {
+    0% { transform: translate3d(-200vw, 0, 0); opacity: 0.4; }
+    50% { opacity: 0.6; }
+    100% { transform: translate3d(0, 0, 0); opacity: 0.4; }
+}
+
+/* ============================================================
+   3. NAVIGATION BAR
+   ============================================================ */
 .navbar {
     position: fixed;
-    top: 0;
+    top: 0; left: 0;
     width: 100%;
     padding: 20px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* PERBAIKAN: Kasih sedikit background gelap agar teks terbaca di segala situasi */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-    z-index: 1000;
+    background: var(--dark-bg); /* Solid agar tulisan jelas */
+    border-bottom: 1px solid rgba(77, 238, 234, 0.1);
+    z-index: 9999; /* Paling atas */
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 800;
     color: #fff;
+    font-style: italic;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-style: italic;
     text-shadow: 0 0 10px rgba(77, 238, 234, 0.5);
-    text-decoration: none;
 }
 
 .nav-links { display: flex; gap: 30px; }
@@ -46,384 +131,454 @@ body {
     font-weight: 500;
     font-size: 0.9rem;
     text-transform: uppercase;
-    text-decoration: none;
-    text-shadow: 0 2px 5px #000; 
     transition: 0.3s;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+}
 .hamburger { display: none; color: #fff; cursor: pointer; font-size: 1.5rem; }
 
-/* --- LANDING PAGE STYLES (INDEX ONLY) --- */
+/* ============================================================
+   4. HOME & LANDING SECTIONS
+   ============================================================ */
+/* ============================================================ */
+/* SECTION DIVIDER & PARALLAX FIX                               */
+/* ============================================================ */
+
 .scroll-section {
-    height: 100vh; /* Full Layar khusus Section Landing Page */
-    width: 100%;
+    position: relative;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Parallax Effect */
-    position: relative;
-    padding: 0 10%;
+    background-attachment: fixed;
+    border-bottom: 4px solid var(--primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     
-    /* PERBAIKAN: Warna cadangan kalau gambar error/tidak ada */
-    background-color: #1a1a2e; 
-    border-bottom: 2px solid var(--primary);
+    z-index: 1;
 }
 
-/* Overlay agar teks terbaca jelas */
+.scroll-section:last-of-type {
+    border-bottom: none;
+    box-shadow: none;
+}
+
 .scroll-section::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Gelapkan background 60% */
+    background: var(--overlay);
     z-index: 1;
+    pointer-events: none; /* KLIK TEMBUS KE BAWAH */
 }
 
-.content-wrapper {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    max-width: 800px;
-}
-
-/* Background Images (Pastikan file ada di folder assets/images/) */
-/* Jika file belum ada, dia akan pakai warna background-color di atas */
+/* Background Images */
 .bg-home { background-image: url('../assets/images/p3r-home.jpg'); }
-.bg-combat { background-image: url('../assets/images/p3r-combat.jpg'); } 
+.bg-combat { background-image: url('../assets/images/p3r-combat.jpg'); }
 .bg-story { background-image: url('../assets/images/p3r-story.jpg'); }
 
-/* --- CONTENT PAGE STYLES (CLASSROOM, COMBAT, ETC) --- */
-/* PERBAIKAN: Container khusus agar Classroom tidak ngebug */
+/* Wrapper Konten Utama */
+.content-wrapper {
+    position: relative;
+    z-index: 10; /* Di atas overlay */
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+    padding: 20px;
+    pointer-events: none; /* Wrapper pasif */
+}
+
+/* Aktifkan interaksi pada anak elemen */
+.content-wrapper > * { pointer-events: auto; }
+
+/* Text Styles */
+.sub-title {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: 700;
+    min-height: 1.5em; /* Stabilizer tinggi */
+    margin-bottom: 10px;
+    display: block;
+}
+
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: #fff;
+    margin-left: 2px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.main-title {
+    font-size: 5rem;
+    font-weight: 900;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 30px;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(77, 238, 234, 0.5), 4px 4px 0 #000;
+}
+
+.section-heading {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+}
+
+.section-desc { font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6; }
+
+/* Alignment Helper */
+.text-left { text-align: left; align-items: flex-start; }
+.text-right { text-align: right; align-items: flex-end; }
+
+/* ============================================================
+   5. BUTTONS (INTERACTION FIX)
+   ============================================================ */
+/* Tombol Home (LZ Corp) */
+a.btn-lz {
+    display: inline-block;
+    position: relative;
+    z-index: 100;
+    padding: 12px 35px;
+    background: rgba(0,0,0,0.7);
+    color: #fff !important;
+    border: 2px solid #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+a.btn-lz:hover {
+    background: #fff;
+    color: #000 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Tombol Konten (Combat/Story) */
+a.btn-p3r {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--primary);
+    color: #000 !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-style: italic;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 100;
+}
+
+a.btn-p3r:hover {
+    transform: scale(1.1) skewX(-10deg);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+/* ============================================================
+   6. CLASSROOM & PAGE LAYOUTS
+   ============================================================ */
 .page-container {
-    padding: 120px 5% 50px; /* Jarak dari atas supaya tidak ketutup Navbar */
-    max-width: 1000px;
+    padding: 120px 5% 50px;
+    max-width: 1200px;
     margin: 0 auto;
     min-height: 100vh;
 }
 
-.page-bg-fixed {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: url('../assets/images/p3r-home.jpg') no-repeat center center/cover;
-    filter: brightness(0.3); /* Gelapkan background */
-    z-index: -1;
+/* Parallax Title (Classroom) */
+.parallax-container {
+    text-align: center;
+    margin-bottom: 60px;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
 }
 
-/* --- COMPONENTS (TYPOGRAPHY & BUTTONS) --- */
-.main-title { 
-    font-size: 4rem; 
-    font-weight: 900; 
-    font-style: italic; 
-    margin: 10px 0; 
-    text-shadow: 3px 3px 0 var(--primary); 
+.parallax-text {
+    font-size: 5rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 0.1s linear;
+    padding: 0 30px; /* Fix Text Cutoff */
+    text-shadow: 4px 4px 0 rgba(77, 238, 234, 0.2);
 }
-
-.sub-title { 
-    font-size: 1.2rem; 
-    letter-spacing: 5px; 
-    color: var(--primary); 
-    text-transform: uppercase; 
-}
-
-.section-heading { 
-    font-size: 3rem; 
-    font-weight: 800; 
-    text-transform: uppercase; 
-    font-style: italic; 
-    color: #fff; 
-    margin-bottom: 20px; 
-}
-
-.section-desc { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
-
-.text-left { text-align: left; align-items: flex-start; display: flex; flex-direction: column; width: 100%; }
-.text-right { text-align: right; align-items: flex-end; display: flex; flex-direction: column; width: 100%; }
-
-/* Buttons */
-.btn-lz { display: inline-block; padding: 12px 30px; border: 2px solid #fff; color: #fff; text-transform: uppercase; font-weight: bold; margin-top: 20px; transition: 0.3s; text-decoration: none; }
-.btn-lz:hover { background: #fff; color: #000; }
-
-.btn-p3r { display: inline-block; padding: 15px 40px; background: var(--primary); color: #000; font-weight: 800; text-transform: uppercase; font-style: italic; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); transition: 0.3s; text-decoration: none;}
-.btn-p3r:hover { transform: scale(1.1) skewX(-10deg); box-shadow: 0 0 20px var(--primary); }
 
 /* ============================================================ */
-/* NEW LAYOUT: CLASSROOM CARDS (FEED STYLE)                     */
+/* FIX: TEXT OUTLINE BUG (MEMISAHKAN ALIGNMENT & STYLE)         */
 /* ============================================================ */
 
-/* Container Feed */
-.classroom-feed {
+/* 1. Alignment Umum (Dipakai di Story & Combat) - HARUS BERSIH */
+.text-left { 
+    text-align: left; 
+    align-items: flex-start; 
     display: flex;
     flex-direction: column;
-    gap: 40px; /* Jarak antar kartu soal */
-    max-width: 800px; /* Batasi lebar biar enak dibaca */
-    margin: 0 auto;   /* Tengahkan */
+    color: #fff; /* Pastikan Putih Solid */
 }
 
-/* Kartu Utama */
-.classroom-card {
-    background: rgba(0, 0, 0, 0.6); /* Transparan Gelap */
-    border: 1px solid rgba(77, 238, 234, 0.3);
-    border-radius: 15px;
-    padding: 25px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.classroom-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(77, 238, 234, 0.15);
-    border-color: var(--primary);
-}
-
-/* Dekorasi Garis Kiri (P3R Style) */
-.classroom-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 5px; height: 100%;
-    background: linear-gradient(to bottom, var(--primary), transparent);
-}
-
-/* --- BUBBLES / WRAPPERS --- */
-
-/* 1. Bubble Gambar (Paling Atas) */
-.card-img-wrapper {
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.card-img-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s;
-}
-
-.card-img-wrapper:hover img {
-    transform: scale(1.05);
-}
-
-/* 2. Bubble Tanggal */
-.card-date-bubble {
-    display: inline-block;
-    background: var(--primary);
-    color: #000;
-    font-weight: 900;
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    box-shadow: 0 0 10px rgba(77, 238, 234, 0.5);
-    font-style: italic;
-}
-
-/* 3. Bubble Pertanyaan */
-.card-question-bubble {
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 3px solid #fff;
-    padding: 15px 20px;
-    border-radius: 0 10px 10px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-/* 4. Bubble Jawaban */
-.card-answer-bubble {
-    background: rgba(77, 238, 234, 0.1); /* Biru P3R Tipis */
-    border: 1px solid var(--primary);
-    padding: 15px 20px;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    color: var(--primary);
-    font-weight: bold;
-    text-align: center; /* Jawaban di tengah biar tegas */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* --- FOOTER --- */
-footer { 
-    background-color: #050505; 
+.text-right { 
+    text-align: right; 
+    align-items: flex-end; 
+    display: flex;
+    flex-direction: column;
+    
+    /* RESET STYLE AGAR TIDAK ADA BORDER BIRU */
     color: #fff; 
-    padding: 40px 20px 20px; 
-    border-top: 1px solid #333; 
-    position: relative; 
-    z-index: 10; 
+    -webkit-text-stroke: 0; 
+    opacity: 1;
 }
 
-.footer-container { 
-    display: flex; 
-    justify-content: space-between; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    flex-wrap: wrap; 
+/* 2. Khusus Judul Parallax (Classroom) - BARU PAKAI OUTLINE */
+/* Kita targetkan elemen yang punya DUA class sekaligus: .parallax-text DAN .text-right */
+.parallax-text.text-right {
+    color: transparent; /* Teks bening */
+    -webkit-text-stroke: 2px var(--primary); /* Garis Tepi Biru */
+    opacity: 0.8;
+    
+    /* Reset display agar tidak konflik dengan flexbox di atas */
+    display: block; 
+    text-align: center; /* Kembalikan ke tengah untuk efek parallax */
 }
 
-.footer-bottom { 
-    text-align: center; 
-    margin-top: 40px; 
-    padding-top: 20px; 
-    border-top: 1px solid #1a1a1a; 
-    font-size: 0.8rem; 
-    color: #555; 
+.parallax-text.text-left {
+    display: block;
+    text-align: center;
 }
 
-/* ============================================================ */
-/* 1. DARK HOUR ATMOSPHERE (PARTICLES & FOG)                    */
-/* ============================================================ */
-body {
-    background-color: #050510; /* Base Hitam Kebiruan */
-    overflow-x: hidden; 
-}
-
-/* Container Background */
-.dark-hour-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -2;
-    background: radial-gradient(circle at bottom, #0a0a2e 0%, #000000 80%);
-}
-
-/* Efek Partikel (Titik-titik kecil) */
-.particles {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: 
-        radial-gradient(white 1px, transparent 1px),
-        radial-gradient(white 1px, transparent 1px);
-    background-size: 50px 50px;
-    background-position: 0 0, 25px 25px;
-    opacity: 0.1; /* Sangat tipis */
-    animation: particleMove 20s linear infinite;
-}
-
-@keyframes particleMove {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50px); }
-}
-
-/* Efek Kabut (Fog) */
-.fog {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 50%;
-    background: linear-gradient(to top, rgba(77, 238, 234, 0.1), transparent);
-    filter: blur(20px);
-    animation: fogFlow 10s ease-in-out infinite alternate;
-}
-
-@keyframes fogFlow {
-    0% { transform: scaleY(1); opacity: 0.3; }
-    100% { transform: scaleY(1.2); opacity: 0.5; }
-}
-
-/* ============================================================ */
-/* 2. LAYOUT 2 KOLOM (Main Content + Sidebar)                   */
-/* ============================================================ */
+/* Main Layout (2 Kolom) */
 .main-layout {
     display: flex;
     gap: 40px;
-    margin-top: 30px;
-    align-items: flex-start; /* Agar sidebar tidak tertarik ke bawah */
+    align-items: flex-start;
 }
 
-/* Kolom Kiri (Konten Utama) */
-.content-area {
-    flex: 3; /* Lebar 75% */
-}
+.content-area { flex: 3; width: 100%; }
 
-/* Kolom Kanan (Sidebar) */
+/* Sidebar */
 .sidebar {
-    flex: 1; /* Lebar 25% */
-    background: rgba(255, 255, 255, 0.05);
+    flex: 1;
+    background: var(--dark-bg); /* Solid Background */
     border: 1px solid rgba(77, 238, 234, 0.3);
-    padding: 20px;
-    border-radius: 5px;
+    padding: 25px;
+    border-radius: 10px;
     position: sticky;
-    top: 100px; /* Nempel pas discroll */
+    top: 100px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
 .sidebar h3 {
     color: var(--primary);
     border-bottom: 2px solid var(--primary);
     padding-bottom: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-style: italic;
     text-transform: uppercase;
 }
 
-.sidebar ul li {
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 5px;
+/* Sidebar Links (Elastic Animation) */
+.sidebar ul li { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+
+.sidebar ul li a { display: block; color: #ccc; transition: none; }
+
+.link-title {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.sidebar ul li a {
-    color: #ccc;
-    font-size: 0.9rem;
-    transition: 0.3s;
-    display: block;
-}
-
-.sidebar ul li a:hover {
+.sidebar ul li a:hover .link-title {
+    transform: translateX(15px);
     color: var(--primary);
-    padding-left: 5px; /* Efek geser */
+    text-shadow: 0 0 10px rgba(77, 238, 234, 0.6);
 }
 
-/* ============================================================ */
-/* UPDATE: UKURAN GAMBAR LEBIH BESAR (250px)                    */
-/* ============================================================ */
+.sidebar ul li a small { display: block; margin-top: 5px; color: #666; font-size: 0.85rem; }
 
-
-.classroom-table td.date-wrapper {
-    width: 280px; 
-    text-align: center;
-    vertical-align: middle;
-    background: rgba(0,0,0,0.3);
-    padding: 20px;
-}
-
-.thumb-large {
+/* ============================================================
+   7. CLASSROOM COMPONENTS (SEARCH & CARDS)
+   ============================================================ */
+/* Search Bar */
+.search-wrapper {
+    position: relative;
     width: 100%;
-    max-width: 250px; 
-    height: auto;
-    border-radius: 4px;
-    border: 1px solid var(--primary);
-    display: block;
-    margin: 0 auto 15px auto;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
-    transition: transform 0.3s;
+    margin-bottom: 40px;
 }
 
-.thumb-large:hover {
-    transform: scale(1.05);
-    border-color: #fff;
+.search-box {
+    width: 100%;
+    padding: 15px 20px 15px 55px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(77, 238, 234, 0.3);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1.1rem;
+    outline: none;
+    transition: 0.3s;
 }
 
-.date-text {
-    font-size: 1.2rem;
-    font-weight: 800;
+.search-box:focus {
+    border-color: var(--primary);
+    background: #000;
+    box-shadow: 0 0 15px rgba(77, 238, 234, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px; top: 50%;
+    transform: translateY(-50%);
     color: var(--primary);
-    display: block;
-    background: rgba(0,0,0,0.8);
-    padding: 5px;
-    border-radius: 3px;
+    font-size: 1.2rem;
 }
 
-/* Responsive: Sidebar turun ke bawah di HP */
-@media (max-width: 900px) {
+/* Feed Cards */
+.classroom-feed { display: flex; flex-direction: column; gap: 40px; }
+
+.classroom-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(77, 238, 234, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.classroom-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(77, 238, 234, 0.1);
+}
+
+.classroom-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--primary);
+}
+
+.card-img-wrapper {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+}
+
+.card-img-wrapper img {
+    width: 100%; height: auto;
+    display: block;
+    transition: transform 0.5s;
+}
+.classroom-card:hover img { transform: scale(1.05); }
+
+.card-date-bubble {
+    display: inline-block;
+    background: var(--primary);
+    color: #000;
+    font-weight: 900;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.card-question-bubble {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid #fff;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.card-answer-bubble {
+    background: rgba(77, 238, 234, 0.1);
+    border: 1px solid var(--primary);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* ============================================================ */
+/* FIX: FOOTER VISIBILITY (AGAR MUNCUL DI SEMUA PAGE)           */
+/* ============================================================ */
+footer {
+    background-color: #050505; /* Hitam Solid */
+    color: #fff;
+    padding: 40px 20px;
+    border-top: 1px solid #333;
+    
+    /* POSITIONING FIX */
+    position: relative; 
+    width: 100%;
+    z-index: 100; /* Angkat layer-nya agar di atas background */
+    margin-top: auto; /* Dorong ke paling bawah */
+    
+    /* Pastikan tidak ada overflow yang menyembunyikan */
+    clear: both;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid #1a1a1a;
+    color: #444;
+}
+
+/* Biar teks footer terbaca jelas */
+.footer-container h4 { color: var(--primary); margin-bottom: 10px; }
+.footer-container p { color: #aaa; font-size: 0.9rem; }
+
+/* ============================================================
+   9. ANIMATIONS & RESPONSIVE
+   ============================================================ */
+.reveal-text { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+.reveal-text.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+    .navbar { background: var(--dark-bg); }
+    .nav-links {
+        position: fixed; top: 0; right: 0; height: 100vh; width: 70%;
+        background: #000; flex-direction: column; justify-content: center;
+        align-items: center; transform: translateX(100%);
+    }
+    .nav-links.active { transform: translateX(0); }
+    .hamburger { display: block; z-index: 10001; }
+    
+    .main-title, .parallax-text { font-size: 3rem; }
     .main-layout { flex-direction: column; }
-    .content-area, .sidebar { width: 100%; }
-    .sidebar { position: static; }
+    .sidebar { position: static; width: 100%; margin-top: 30px; }
+    .text-left, .text-right { text-align: center; align-items: center; }
 }

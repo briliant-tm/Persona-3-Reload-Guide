@@ -23,18 +23,35 @@
     </nav>
 
     <div class="dark-hour-bg">
-        <div class="particles"></div>
-        <div class="fog"></div>
+        <div class="stars stars-1"></div>
+        <div class="stars stars-2"></div>
+        <div class="stars stars-3"></div>
+        
+        <div class="fog-container">
+            <div class="fog-img fog-1"></div>
+            <div class="fog-img fog-2"></div>
+        </div>
     </div>
 
     <div class="page-container">
         
+        <div class="parallax-container">
+            <h1 class="parallax-text text-left" id="titleClassroom">CLASSROOM</h1>
+            <h1 class="parallax-text text-right" id="titleAnswers">ANSWERS</h1>
+        </div>
+        
+        <p class="section-desc reveal-text" style="text-align: center; color: #ccc; margin-top: -30px; margin-bottom: 50px;">
+            Scroll down to reveal the truth.
+        </p>
+
         <div class="main-layout reveal-text">
             
             <div class="content-area">
                 
-                <h1 class="section-heading">Classroom Answers</h1>
-                <input type="text" id="searchInput" class="search-box" placeholder="Cari pertanyaan, tanggal, atau jawaban...">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" class="search-box" placeholder="Search Question, Date, or Answer...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
 
                 <div class="classroom-feed" id="cardFeed">
 
@@ -42,13 +59,10 @@
                         <div class="card-img-wrapper">
                             <img src="assets/images/classroom/4-8.jpg" alt="Soal 4/8" onerror="this.style.display='none'">
                         </div>
-                        
                         <span class="card-date-bubble">4/8</span>
-                        
                         <div class="card-question-bubble">
                             What phrase symbolizes summer?
                         </div>
-                        
                         <div class="card-answer-bubble">
                             A Vivid Carp Streamer
                         </div>
@@ -83,20 +97,77 @@
                     </div> </div>
 
             <aside class="sidebar">
-                <h3>Quick Nav</h3>
+                <h3>Guide Navigation</h3>
                 <ul>
-                    <li><a href="story.html">Social Link Guide</a></li>
-                    <li><a href="combat.html">Tartarus Bosses</a></li>
-                    <li><a href="wiki.html">Exam Rewards</a></li>
+                    <li>
+                        <a href="story.html">
+                            <span class="link-title">Social Link Guide</span>
+                            <br>
+                            <small>Max Rank All Characters</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="combat.html">
+                            <span class="link-title">Tartarus Bosses</span>
+                            <br>
+                            <small>Floor 1-264 Strategy</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="wiki.html">
+                            <span class="link-title">Exam Rewards</span>
+                            <br>
+                            <small>Mitsuru's Rewards List</small>
+                        </a>
+                    </li>
                 </ul>
-                <h3 style="margin-top:30px;">External</h3>
+
+                <h3 style="margin-top: 30px;">External Links</h3>
                 <ul>
-                    <li><a href="https://lzcorporation.vercel.app" target="_blank" style="color:var(--primary)">LZ Corp Portfolio</a></li>
+                    <li>
+                        <a href="https://lzcorporation.vercel.app" target="_blank">
+                            <span class="link-title">LZ Corp Portfolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">
+                            <span class="link-title">Official P3R Website</span>
+                        </a>
+                    </li>
                 </ul>
             </aside>
 
+        </div> </div>
+        <div class="page-container">
+        
+        </div> 
+        <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> West Java, Indonesia</li>
+                    <li><i class="fas fa-envelope"></i> business@lzcorp.id</li>
+                    <li><i class="fas fa-phone-alt"></i> +62 878-3337-XXXX</li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h4>LZ Corporation Ltd.</h4>
+                <p class="brand-desc">
+                    Simplifying connectivity.<br>
+                    Secure. Scalable. Modern.
+                </p>
+                <div class="social-simple">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LZ Corporation Ltd. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <script src="js/script.js"></script>
 
@@ -130,8 +201,27 @@
                     } else {
                         card.style.display = "none"; // Sembunyikan
                     }
+                    
                 });
             });
+        });
+        
+        // ==========================================
+        // PARALLAX TEXT EFFECT (CLASSROOM ANSWERS)
+        // ==========================================
+        document.addEventListener('scroll', function() {
+            const scrollValue = window.scrollY;
+    
+            const titleLeft = document.getElementById('titleClassroom');
+            const titleRight = document.getElementById('titleAnswers');
+        
+            if(titleLeft && titleRight) {
+                // "Classroom" geser ke KIRI (-0.5 kecepatan)
+                titleLeft.style.transform = `translateX(-${scrollValue * 0.5}px)`;
+        
+                // "Answers" geser ke KANAN (+0.5 kecepatan)
+                titleRight.style.transform = `translateX(${scrollValue * 0.5}px)`;
+            }
         });
     </script>
 </body>
